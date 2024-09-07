@@ -22,7 +22,7 @@ init-db:
 
 .PHONY: generate-orm
 generate-orm:
-	npx prisma generate
+	cd apps/jubmoji-quest && npx prisma generate
 
 .PHONY: start
 start:
