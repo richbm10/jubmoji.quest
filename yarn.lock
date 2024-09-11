@@ -7397,6 +7397,39 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"jubmoji.staff@workspace:apps/jubmoji-staff":
+  version: 0.0.0-use.local
+  resolution: "jubmoji.staff@workspace:apps/jubmoji-staff"
+  dependencies:
+    "@headlessui/react": ^1.4.1
+    "@tailwindcss/line-clamp": ^0.4.4
+    "@tw-classed/react": ^1.5.2
+    "@types/node": ^20
+    "@types/pako": ^2.0.1
+    "@types/qr-image": ^3.2.7
+    "@types/react": ^18
+    "@types/react-dom": ^18
+    autoprefixer: ^10
+    clsx: ^2.0.0
+    cross-env: 5.0.5
+    dotenv: ^16.3.1
+    eslint: ^8
+    eslint-config-next: 13.5.4
+    mobile-detect: ^1.4.5
+    next: 13.5.4
+    next-pwa: ^5.6.0
+    postcss: ^8
+    qrcode.react: ^4.0.1
+    react: ^18
+    react-dom: ^18
+    react-qr-code: ^2.0.12
+    react-query: ^3.39.3
+    tailwind-merge: ^1.14.0
+    tailwindcss: ^3
+    typescript: ^5
+  languageName: unknown
+  linkType: soft
+
 "jubmoji@workspace:.":
   version: 0.0.0-use.local
   resolution: "jubmoji@workspace:."
@@ -8779,6 +8812,15 @@ __metadata:
   version: 0.0.0
   resolution: "qr.js@npm:0.0.0"
   checksum: 5ac6c393967bdeaa660e7fd3a501a25eb538c1f6008a4d30ab2b97bbe520e5c236530090773f1578aa0a523cdaa6923c866615e21143f9e7cd22abd41c789b69
+  languageName: node
+  linkType: hard
+
+"qrcode.react@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "qrcode.react@npm:4.0.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 947728a991a4b7b3e2722c20334d47622f689b482114a2f95a2befe6c985d8205b0a4a0ac68bf35514bdb7c192748a14e0cf7b07df6fcc005032b8db6d342dd9
   languageName: node
   linkType: hard
 

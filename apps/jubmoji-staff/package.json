@@ -11,8 +11,6 @@
   "dependencies": {
     "@headlessui/react": "^1.4.1",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "@thirdweb-dev/react": "^4.9.4",
-    "@thirdweb-dev/sdk": "^4.0.99",
     "@tw-classed/react": "^1.5.2",
     "clsx": "^2.0.0",
     "cross-env": "5.0.5",

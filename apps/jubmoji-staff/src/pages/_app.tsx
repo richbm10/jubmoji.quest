@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
@@ -19,9 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <OnlyMobile>
           <div className="md:container flex-col relative px-[16px] pb-28 overflow-hidden">
             <div className="mx-auto w-full">
-              <ThirdwebProvider activeChain="ethereum">
-                <Component {...pageProps} />
-              </ThirdwebProvider>
+              <Component {...pageProps} />
             </div>
           </div>
           <Toaster
