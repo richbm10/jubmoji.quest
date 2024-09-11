@@ -6,8 +6,7 @@
     "dev": "PORT=3001 next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "prisma migrate deploy && prisma generate"
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
