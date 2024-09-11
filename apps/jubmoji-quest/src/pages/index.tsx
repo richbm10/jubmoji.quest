@@ -22,6 +22,7 @@ import { AssistedTapModal } from "@/components/modals/AssistedTapModal";
 import { useFetchCollectedCards } from "@/hooks/useFetchCards";
 import { cardPubKeys } from "jubmoji-api";
 import { $Enums } from "@prisma/client";
+import QrScanner from "@/components/qr/scanner";
 
 export const QuestTagMapping: Record<
   "ACTIVE" | "ALL" | "OFFICIAL" | "EXPIRED",
@@ -54,7 +55,7 @@ export default function Home() {
       )
     );
   });
-
+  const [showScanner, setShowScanner] = useState(false);
   const expiredQuests: JubmojiQuest[] = [];
   const officialQuests: JubmojiQuest[] = [];
   const nonOfficialActiveQuests: JubmojiQuest[] = [];
@@ -209,6 +210,15 @@ export default function Home() {
             onClick={() => setAssistedTapModal(true)}
           >
             Assisted tap
+            </Button>
+          {/* Add the QR scanner toggle button */}
+          <Button
+            size="tiny"
+            variant="blue"
+            className="font-semibold"
+            onClick={() => setShowScanner(!showScanner)} // Toggle scanner visibility
+          >
+            {showScanner ? "Close QR Scanner" : "Open QR Scanner"}
           </Button>
         </div>
         <div className="flex flex-col gap-2 mt-4">
@@ -232,6 +242,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* Conditionally render the QR scanner */}
+        {showScanner && <QrScanner />}
       </div>
     </>
   );
