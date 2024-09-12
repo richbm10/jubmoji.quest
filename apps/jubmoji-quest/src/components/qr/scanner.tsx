@@ -43,6 +43,7 @@ const Scanner: React.FC<ScannerProps> = ({ onResult, onClose }) => {
           </Button>
         </div>
       )}
+
     </div>
   );
 };
