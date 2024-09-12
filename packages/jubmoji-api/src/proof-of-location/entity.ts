@@ -1,12 +1,12 @@
 import * as crypto from 'crypto';
 
 // Function to hash an element using SHA-256
-function sha256(data: string): string {
+export function sha256(data: string): string {
     return crypto.createHash('sha256').update(data).digest('hex');
 }
 
-// Node of the Merkle tree
-class MerkleNode {
+// Merkle Tree Node
+export class MerkleNode {
     public hash: string;
     public left: MerkleNode | null;
     public right: MerkleNode | null;
@@ -17,7 +17,7 @@ class MerkleNode {
         this.right = right;
         this.element = element;
 
-        // If it is a leaf, hash the element; otherwise, hash the hashes of the children
+        // If it's a leaf, hash the element, otherwise hash the hashes of the children
         if (element) {
             this.hash = sha256(element);
         } else if (left && right) {
@@ -28,8 +28,8 @@ class MerkleNode {
     }
 }
 
-// Builder for the Merkle tree
-class MerkleTreeBuilder {
+// Builder for the Merkle Tree
+export class MerkleTreeBuilder {
     private leaves: MerkleNode[] = [];
 
     // Add a leaf (element) to the tree
@@ -41,7 +41,7 @@ class MerkleTreeBuilder {
     // Build the Merkle tree and return the root
     build(): MerkleNode {
         if (this.leaves.length === 0) {
-            throw new Error("No leaves to build the Merkle tree");
+            throw new Error("No leaves to build the Merkle Tree");
         }
 
         let nodes = this.leaves.slice();
@@ -51,7 +51,7 @@ class MerkleTreeBuilder {
             nodes.push(nodes[nodes.length - 1]);
         }
 
-        // Combine nodes in pairs until obtaining the root
+        // Combine nodes two by two until we get the root
         while (nodes.length > 1) {
             const newLevel: MerkleNode[] = [];
 
@@ -70,13 +70,13 @@ class MerkleTreeBuilder {
             nodes = newLevel;
         }
 
-        // The last node remaining is the root
+        // The last remaining node is the root
         return nodes[0];
     }
 }
 
-// Main class that manages the Merkle tree
-class MerkleTree {
+// Main class that manages the Merkle Tree
+export class MerkleTree {
     private merkleRoot: string | null = null;
     private builder: MerkleTreeBuilder;
 
@@ -84,7 +84,7 @@ class MerkleTree {
         this.builder = new MerkleTreeBuilder();
     }
 
-    // Add a leaf to the tree through the builder
+    // Add a leaf to the tree via the builder
     addLeaf(element: string): void {
         this.builder.addLeaf(element);
     }
@@ -96,11 +96,11 @@ class MerkleTree {
         return this.merkleRoot;
     }
 
-    // Check if a hash is present in the tree (search)
+    // Check if a hash is present in the tree (query)
     query(element: string): boolean {
         const elementHash = sha256(element);
 
-        // Traverse the tree from the root to check if the hash is present
+        // Traverse the tree from the root to verify if the hash is present
         const search = (node: MerkleNode | null): boolean => {
             if (!node) return false;
             if (node.hash === elementHash) return true;
