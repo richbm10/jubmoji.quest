@@ -46,6 +46,7 @@ import { hexToBigInt } from "babyjubjub-ecdsa";
 import { buildPoseidonOpt as buildPoseidon } from "circomlibjs";
 import { Input } from "@/components/ui/Input";
 import { Message } from "@/components/Message";
+import Scanner from "@/components/qr/scanner"; 
 
 const PagePlaceholder = () => {
   return (
@@ -65,11 +66,35 @@ export default function QuestDetailPage() {
   const router = useRouter();
   const { id: questId } = router.query;
   const { data: jubmojis } = useJubmojis();
-  const { isLoading: isLoadingCollectedCards, data: collectedCards = [] } =
-    useFetchCollectedCards();
-  const { isLoading: isLoadingQuest, data: quest = null } = useFetchQuestById(
-    questId as string
-  );
+  const { isLoading: isLoadingCollectedCards, data: collectedCards = [] } = useFetchCollectedCards();
+  const { isLoading: isLoadingQuest, data: quest = null } = useFetchQuestById(questId as string);
+
+  const [showScanner, setShowScanner] = useState(false); // State to toggle the QR scanner
+  const [qrData, setQrData] = useState<string | null>(null); // State to store QR data
+
+  const handleScannerResult = (data: string | null) => {
+    if (data && isValidUrl(data)) {
+      window.location.href = data; 
+    } else {
+      setQrData(data);
+    }
+  };
+
+  const isValidUrl = (url: string) => {
+    try {
+      new URL(url); 
+      return true;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  const toggleScanner = () => {
+    if (showScanner) {
+      setQrData(null); 
+    }
+    setShowScanner(!showScanner); 
+  };
 
   const updateLeaderboardMutation = useUpdateLeaderboardMutation();
   const {
@@ -362,61 +387,80 @@ export default function QuestDetailPage() {
         }
       />
       <div className="grid grid-cols-1 gap-4">
-        <QuestCard
-          title={quest.name}
-          description={quest.description}
-          image={quest.imageLink || ""}
-          spacing="sm"
-          numPowersCompleted={numPowersCompleted}
-          numPowersTotal={quest.powers.length}
-        >
-          <div className="flex flex-col gap-1 mt-2">
-            {collectionCardIndices.length > 0 && (
-              <>
-                <div className="flex flex-col">
-                  <Card.Title className="!text-base text-left">
-                    Collect
-                  </Card.Title>
-                  <div className="flex gap-2"></div>
-                </div>
-                <div className="flex flex-wrap gap-1 mr-auto">
-                  {collectionCardIndices.map((index) => {
-                    const isCollected = collectedCards.find(
-                      (collectedCard) => collectedCard.pubKeyIndex === index
-                    )?.pubKeyIndex;
+      <QuestCard
+        title={quest.name}
+        description={quest.description}
+        image={quest.imageLink || ""}
+        spacing="sm"
+        numPowersCompleted={numPowersCompleted}
+        numPowersTotal={quest.powers.length}
+      >
+        <div className="flex flex-col gap-1 mt-2">
+          {collectionCardIndices.length > 0 && (
+            <>
+              <div className="flex flex-col">
+                <Card.Title className="!text-base text-left">
+                  Collect
+                </Card.Title>
+                <div className="flex gap-2"></div>
+              </div>
+              <div className="flex flex-wrap gap-1 mr-auto">
+                {collectionCardIndices.map((index) => {
+                  const isCollected = collectedCards.find(
+                    (collectedCard) => collectedCard.pubKeyIndex === index
+                  )?.pubKeyIndex;
 
-                    return isLoadingCollectedCards ? (
-                      <Placeholder.Base className="w-4 h-4"></Placeholder.Base>
-                    ) : (
-                      <span
-                        key={index}
-                        className={cn(
-                          "!text-[20px]",
-                          !isCollected && "opacity-30"
-                        )}
-                      >
-                        {quest.proofType ===
-                          $Enums.ProofType.TEAM_LEADERBOARD &&
-                        !jubmojis?.find(
-                          (jubmoji) => jubmoji.pubKeyIndex === index
-                        )
-                          ? "❓" // Hide collection emojis that have not been collected for team leaderboard quests
-                          : cardPubKeys[index].emoji}
-                      </span>
-                    );
-                  })}
-                </div>
-              </>
-            )}
+                  return isLoadingCollectedCards ? (
+                    <Placeholder.Base className="w-4 h-4"></Placeholder.Base>
+                  ) : (
+                    <span
+                      key={index}
+                      className={cn(
+                        "!text-[20px]",
+                        !isCollected && "opacity-30"
+                      )}
+                    >
+                      {quest.proofType ===
+                        $Enums.ProofType.TEAM_LEADERBOARD &&
+                      !jubmojis?.find(
+                        (jubmoji) => jubmoji.pubKeyIndex === index
+                      )
+                        ? "❓"
+                        : cardPubKeys[index].emoji}
+                    </span>
+                  );
+                })}
+              </div>
+            </>
+          )}
 
-            <div className="mr-auto">
-              <span className="text-shark-400 text-[13px] font-dm-sans">
-                {endDateLabel}
-              </span>
-            </div>
+          <div className="mr-auto">
+            <span className="text-shark-400 text-[13px] font-dm-sans">
+              {endDateLabel}
+            </span>
           </div>
-        </QuestCard>
 
+          {/* Add the QR scanner button inside the QuestCard only if ProofType is LOCATION */}
+          {quest.proofType === $Enums.ProofType.LOCATION && (
+          <>
+            <Button
+              size="tiny"
+              variant="blue"
+              className="font-semibold mt-4 px-4 py-2 rounded-lg shadow-md transition-all duration-200 ease-in-out transform hover:scale-105"
+              onClick={toggleScanner} // Control the visibility of the scanner
+            >
+              Open QR Scanner
+            </Button>
+            {showScanner && (
+              <Scanner 
+                onResult={handleScannerResult} 
+                onClose={toggleScanner} // Pass toggleScanner to close the scanner
+              />
+            )}
+          </>
+        )}
+        </div>
+        </QuestCard>
         {quest.powers.map((power) => {
           const collectionCardIndices = power.collectionCards.map(
             (card) => card.index

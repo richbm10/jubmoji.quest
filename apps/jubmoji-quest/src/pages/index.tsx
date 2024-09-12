@@ -239,15 +239,6 @@ export default function Home() {
           >
             Assisted tap
           </Button>
-          {/* Add the QR scanner toggle button */}
-          <Button
-            size="tiny"
-            variant="blue"
-            className="font-semibold"
-            onClick={toggleScanner}
-          >
-            {showScanner ? "Close QR Scanner" : "Open QR Scanner"}
-          </Button>
         </div>
         <div className="flex flex-col gap-2 mt-4">
           <div className="grid grid-cols-1 gap-6">
@@ -270,8 +261,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* Conditionally render the QR scanner */}
-        {showScanner && <Scanner onResult={handleScannerResult} />}
       </div>
     </>
   );
