@@ -9,7 +9,8 @@
   "dependencies": {
     "@noble/secp256k1": "^2.0.0",
     "babyjubjub-ecdsa": "^1.1.2",
-    "js-sha256": "^0.10.1"
+    "js-sha256": "^0.10.1",
+    "snarkjs": "^0.7.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.6",

@@ -2999,7 +2999,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-
 "@ungap/structured-clone@npm:^1.2.0":
   version: 1.2.0
   resolution: "@ungap/structured-clone@npm:1.2.0"
@@ -7467,6 +7466,7 @@ __metadata:
     babyjubjub-ecdsa: ^1.1.2
     jest: ^29.7.0
     js-sha256: ^0.10.1
+    snarkjs: ^0.7.1
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   languageName: unknown
@@ -9121,20 +9121,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-qr-reader@npm:^3.0.0-beta-1":
-  version: 3.0.0-beta-1
-  resolution: "react-qr-reader@npm:3.0.0-beta-1"
-  dependencies:
-    "@zxing/browser": 0.0.7
-    "@zxing/library": ^0.18.3
-    rollup: ^2.67.2
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  checksum: f85fc490251cba1b763b9f1eb56ac8fb3cd006fcb189ed2b4e8e59bfb61f9493d96274aeb5e980b6093b9ca5595af76893369ecc00562664d033f37f567bd00d
-  languageName: node
-  linkType: hard
-
 "react-query@npm:^3.39.3":
   version: 3.39.3
   resolution: "react-query@npm:3.39.3"
@@ -10445,13 +10431,6 @@ __metadata:
   peerDependencies:
     typescript: ">=4.2.0"
   checksum: c746ddabfdffbf16cb0b0db32bb287236a19e583057f8649ee7c49995bb776e1d3ef384685181c11a1a480369e022ca97512cb08c517b2d2bd82c83754c97012
-  languageName: node
-  linkType: hard
-
-"ts-custom-error@npm:^3.0.0":
-  version: 3.3.1
-  resolution: "ts-custom-error@npm:3.3.1"
-  checksum: 50a1e825fced68d70049bd8d282379a635e43aa023a370fa8e736b12a6edba7f18a2d731fa194ac35303a8b625be56e121bdb31d8a0318250d1a8b277059fce3
   languageName: node
   linkType: hard
 
