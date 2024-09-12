@@ -6,10 +6,19 @@
     "apps/*",
     "packages/*"
   ],
+  "nohoist": [
+    "apps/jubmoji-quest/**",
+    "apps/jubmoji-quest"
+  ],
   "packageManager": "yarn@3.6.4",
   "dependencies": {
+    "next": "13.5.4",
     "next-pwa": "^5.6.0",
+    "react": "^18",
+    "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "react-qr-reader": "^3.0.0-beta-1"
+    "react-qr-code": "^2.0.12",
+    "react-qr-reader": "^3.0.0-beta-1",
+    "react-query": "^3.39.3"
   }
 }
