@@ -200,6 +200,7 @@ export default function QuestConsole({ password }: { password: string }) {
             </option>
             <option value="LEADERBOARD">Leaderboard</option>
             <option value="TEAM_LEADERBOARD">Team Leaderboard</option>
+            <option value="LOCATION">Location</option>
           </select>
         </div>
         {proofType === "N_UNIQUE_IN_COLLECTION" && (
