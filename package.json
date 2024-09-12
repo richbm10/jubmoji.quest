@@ -2,14 +2,13 @@
   "name": "jubmoji",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "nohoist": [
-    "apps/jubmoji-quest/**",
-    "apps/jubmoji-quest"
-  ],
+  "workspaces": {
+    "packages": ["apps/*", "packages/*"],
+    "nohoist": [
+      "apps/jubmoji-quest/**",
+      "apps/jubmoji-quest"
+    ]
+  },
   "packageManager": "yarn@3.6.4",
   "dependencies": {
     "next": "13.5.4",
@@ -19,6 +18,9 @@
     "react-hot-toast": "^2.4.1",
     "react-qr-code": "^2.0.12",
     "react-qr-reader": "^3.0.0-beta-1",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "webpack": "^5.0.0",
+    "@babel/core": "^7.0.0",
+    "babel-loader": "^8.0.0"
   }
 }
