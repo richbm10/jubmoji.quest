@@ -200,6 +200,7 @@ enum ProofType {
   N_UNIQUE_IN_COLLECTION
   LEADERBOARD
   TEAM_LEADERBOARD
+  LOCATION
 }
 
 enum PowerType {
