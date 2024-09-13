@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
 import { useFetchQuestById } from "@/hooks/useFetchQuests";
 import { Placeholder } from "@/components/Placeholder";
 import { Card } from "@/components/cards/Card";
@@ -46,6 +47,7 @@ import { hexToBigInt } from "babyjubjub-ecdsa";
 import { buildPoseidonOpt as buildPoseidon } from "circomlibjs";
 import { Input } from "@/components/ui/Input";
 import { Message } from "@/components/Message";
+import { useLocationQuest } from "@/hooks/useLocationQuest";
 
 const PagePlaceholder = () => {
   return (
@@ -68,6 +70,9 @@ export default function QuestDetailPage() {
   const { isLoading: isLoadingCollectedCards, data: collectedCards = [] } =
     useFetchCollectedCards();
   const { isLoading: isLoadingQuest, data: quest = null } = useFetchQuestById(
+    questId as string
+  );
+  const { isVisible, timestamp, qrUrl, handleIsVisible } = useLocationQuest(
     questId as string
   );
 
@@ -414,6 +419,34 @@ export default function QuestDetailPage() {
                 {endDateLabel}
               </span>
             </div>
+
+            {/* Add the QR scanner button inside the QuestCard only if ProofType is LOCATION */}
+            {quest.proofType === $Enums.ProofType.LOCATION && (
+              <>
+                <Button
+                  size="tiny"
+                  variant="blue"
+                  className="font-semibold mt-4 px-4 py-2 rounded-lg shadow-md transition-all duration-200 ease-in-out transform hover:scale-105"
+                  onClick={() => handleIsVisible(true)} // Control the visibility of the scanner
+                >
+                  Quest QR
+                </Button>
+
+                {isVisible &&
+                  (qrUrl ? (
+                    <>
+                      {/* Use QRCode to render the QR code */}
+                      <QRCode value={qrUrl} size={256} />
+                      <p>
+                        Timestamp:{" "}
+                        {timestamp ? new Date(timestamp).toLocaleString() : ""}
+                      </p>
+                    </>
+                  ) : (
+                    <p>Loading QR code...</p>
+                  ))}
+              </>
+            )}
           </div>
         </QuestCard>
 
