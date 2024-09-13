@@ -53,6 +53,16 @@ model Quest {
   leaderboardNullifiers     LeaderboardNullifiers[]
   leaderboardPseudonyms     LeaderboardPseudonym[]
   teamLeaderboardNullifiers TeamLeaderboardNullifiers[]
+  locationQuest  LocationQuest? // Optional relation to LocationQuest
+}
+
+model LocationQuest {
+  id                Int      @id @default(autoincrement()) @map("questId") // Shares ID with the Quest model
+  quest             Quest    @relation(fields: [id], references: [id])     // Link to parent Quest
+  campaignId        Int
+  campaign          Campaign @relation(fields: [campaignId], references: [id])
+  polygonCoordinates Json    // Stores the 4 coordinates as lat/lng pairs
+  polygonHash       String   // Poseidon hash of the polygon
 }
 
 model Power {
@@ -189,6 +199,16 @@ model ClubPost {
   card Card? @relation(fields: [cardIndex], references: [index])
 }
 
+model Campaign {
+  id             Int      @id @default(autoincrement())
+  name           String
+  description    String
+  merkleRootHash String
+  startTime      DateTime
+  endTime        DateTime
+  quests         LocationQuest[]  // One campaign has many quests
+}
+
 enum CardType {
   PERSONAL
   GROUP
@@ -200,6 +220,7 @@ enum ProofType {
   N_UNIQUE_IN_COLLECTION
   LEADERBOARD
   TEAM_LEADERBOARD
+  LOCATION
 }
 
 enum PowerType {
