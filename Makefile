@@ -27,3 +27,7 @@ generate-orm:
 .PHONY: start
 start:
 	cd packages/jubmoji-api && yarn run build && cd ../../apps/jubmoji-quest && yarn dev
+
+.PHONY: start-staff
+start-staff:
+	cd packages/jubmoji-api && yarn run build && cd ../../apps/jubmoji-staff && yarn dev
