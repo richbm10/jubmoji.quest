@@ -2781,6 +2781,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/circomlibjs@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@types/circomlibjs@npm:0.1.6"
+  checksum: c1626380bd46f6da6ab45c59338a91f0166933ae987a03eda2ae09c490457aa010e412c46192502198b7b41054ee0129bece3d3edcbabdb05ea226582f772cc4
+  languageName: node
+  linkType: hard
+
 "@types/elliptic@npm:^6.4.15":
   version: 6.4.16
   resolution: "@types/elliptic@npm:6.4.16"
@@ -7489,6 +7496,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "jubmoji@workspace:."
   dependencies:
+    "@types/circomlibjs": ^0.1.6
     next-pwa: ^5.6.0
     react-hot-toast: ^2.4.1
     react-qr-reader: ^3.0.0-beta-1
