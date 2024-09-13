@@ -45,7 +45,7 @@ export interface ProofClass<A, P> {
 // A: Arguments needed to prove the proof
 // P: The proof. Should be JSON.stringify-able
 export interface ProofClassConstructor<C, A, P> {
-  new (classArgs: C): ProofClass<A, P>;
+  new(classArgs: C): ProofClass<A, P>;
 }
 
 // Creates an instance of a proof class

@@ -63,3 +63,76 @@ export type JubmojiPower = Power & {
 export type JubmojiQRCodeData = QRCode & {
   power: JubmojiPower;
 };
+
+// Define the QuestBuilder class
+export class QuestBuilder {
+  name: string = "";
+  description: string = "";
+  startTime: Date | null = null;
+  endTime: Date | null = null;
+  isOfficial: boolean = false;
+  isAlwaysVisible: boolean = false;
+  prerequisiteCardIndices: number[] = [];
+  collectionCardIndices: number[] = [];
+  proofType: string = "IN_COLLECTION"; // Default value
+  N: number | null = null;
+
+  constructor(init?: Partial<QuestBuilder>) {
+    Object.assign(this, init);
+  }
+
+  setName(name: string) {
+    this.name = name;
+  }
+
+  setDescription(description: string) {
+    this.description = description;
+  }
+
+  setStartTime(startTime: Date) {
+    this.startTime = startTime;
+  }
+
+  setEndTime(endTime: Date) {
+    this.endTime = endTime;
+  }
+
+  setIsOfficial(isOfficial: boolean) {
+    this.isOfficial = isOfficial;
+  }
+
+  setIsAlwaysVisible(isAlwaysVisible: boolean) {
+    this.isAlwaysVisible = isAlwaysVisible;
+  }
+
+  setPrerequisiteCardIndices(indices: number[]) {
+    this.prerequisiteCardIndices = indices;
+  }
+
+  setCollectionCardIndices(indices: number[]) {
+    this.collectionCardIndices = indices;
+  }
+
+  setProofType(proofType: string) {
+    this.proofType = proofType;
+  }
+
+  setN(N: number) {
+    this.N = N;
+  }
+
+  build() {
+    return {
+      name: this.name,
+      description: this.description,
+      startTime: this.startTime,
+      endTime: this.endTime,
+      isOfficial: this.isOfficial,
+      isAlwaysVisible: this.isAlwaysVisible,
+      prerequisiteCardIndices: this.prerequisiteCardIndices,
+      collectionCardIndices: this.collectionCardIndices,
+      proofType: this.proofType,
+      N: this.N,
+    };
+  }
+}
