@@ -4,6 +4,7 @@ import CardConsole from "./cardConsole";
 import QuestConsole from "./questConsole";
 import PowerConsole from "./powerConsole";
 import ForegroundTapConsole from "./foregroundTapConsole";
+import CampaignConsole from "./campaignConsole";
 
 const MainConsole = () => {
   const [password, setPassword] = useState("");
@@ -22,6 +23,8 @@ const MainConsole = () => {
         return <PowerConsole password={password} />;
       case "Foreground Tap":
         return <ForegroundTapConsole />;
+      case "Campaign":
+        return <CampaignConsole password={password} />;
       default:
         return <div>No console selected</div>;
     }
@@ -107,6 +110,12 @@ const MainConsole = () => {
           className="focus:outline-none"
         >
           Foreground Tap
+        </button>
+        <button
+          onClick={() => setSelectedConsole("Campaign")}
+          className="focus:outline-none"
+        >
+          Campaign
         </button>
       </div>
 
