@@ -200,12 +200,13 @@ model ClubPost {
 }
 
 model Campaign {
-  id             Int      @id @default(autoincrement())
+  id             Int        @id @default(autoincrement())
   name           String
   description    String
   merkleRootHash String
   startTime      DateTime
   endTime        DateTime
+  proofType      ProofType
   quests         LocationQuest[]  // One campaign has many quests
 }
 
